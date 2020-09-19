@@ -1,4 +1,4 @@
-\---
+---
 
 layout: post
 
@@ -14,16 +14,16 @@ category: jekyll
 
 thumbnail: /assets/img/posts/code.jpg
 
-\---
+---
 
 
 
-\# 첫 글입니다 !
+# 첫 글입니다 !
 
 
 
-\## 아직 조금 어려운 면이 있네요 
+## 아직 조금 어려운 면이 있네요 
 
 
 
-\### 적응 하겠죠?
+### 적응 하겠죠?
