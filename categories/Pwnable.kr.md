@@ -1,6 +1,6 @@
 ---
 layout: page
-title: DreamHack
+title: Pwnable.kr
 permalink: /blog/categories/Pwnable.kr/
 
 ---
