@@ -4,7 +4,7 @@ title:  "New Orleans(1)"
 summary: Microcorruption CTF
 author: Damian
 date: '2020-09-20 14:41:00 +0900'
-category: DreamHack
+category: MicroCorruption
 thumbnail: /assets/img/posts/MicroCorruption/a1/p2.png
 ---
 
