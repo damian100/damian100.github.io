@@ -19,7 +19,7 @@ thumbnail: /assets/img/posts/MicroCorruption/a1/p2.png
 
 ##### 0x2400 에는 ZfzG}L< 이라는 값이 담겨있다.
 
-
+<center><img src="/assets/img/posts/MicroCorruption/a1/p1.png" width="100%" height="100%"></center>
 
 ### <center>FLAG :  ZfzG}L<</center> 
 
