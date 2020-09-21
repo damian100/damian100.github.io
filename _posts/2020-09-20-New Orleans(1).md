@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "rev-basic-6"
+title:  "New Orleans(1)"
 summary: Microcorruption CTF
 author: Damian
 date: '2020-09-20 14:41:00 +0900'
