@@ -3,7 +3,7 @@ layout: post
 title:  "New Orleans(1)"
 summary: Microcorruption CTF
 author: Damian
-date: '2020-09-20 14:41:00 +0900'
+date: '2020-09-21 14:41:00 +0900'
 category: MicroCorruption
 thumbnail: /assets/img/posts/MicroCorruption/a1/p2.png
 ---
