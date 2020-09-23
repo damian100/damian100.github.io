@@ -103,8 +103,8 @@ show_author_education_details: true
 show_author_project_details: true
 
 # pagination of posts
-paginate: 8
-per_page: 8
+paginate: 5
+per_page: 5
 paginate_path: "/blog/page/:num/"
 
 # minify
