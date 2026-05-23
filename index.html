@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Damian의 리버스 엔지니어링, 시스템 분석, 보안 프로젝트 포트폴리오입니다." />
+  <meta name="description" content="Damian의 리버스 엔지니어링, 하이퍼바이저 기반 디버거, 네트워크 보안 프로젝트 포트폴리오입니다." />
   <meta name="author" content="Damian" />
   <meta property="og:title" content="Damian Lab | Security Portfolio" />
-  <meta property="og:description" content="Reverse Engineering · System Analysis · Security Projects" />
+  <meta property="og:description" content="Reverse Engineering · Hypervisor-assisted Debugger · Network Security" />
   <meta property="og:type" content="website" />
   <title>Damian Lab | Security Portfolio</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260523-11" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"></div>
   <div class="page-noise" aria-hidden="true"></div>
 
   <header class="site-header" id="top">
     <nav class="navbar" aria-label="Main navigation">
       <a class="brand" href="#top" aria-label="Damian Lab home">
         <span class="brand-mark">D</span>
-        <span class="brand-text">Damian Lab</span>
+        <span class="brand-text">Damian Portfolio</span>
       </a>
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
         <span></span>
@@ -40,12 +42,11 @@
       <div class="hero-orbit orbit-one" aria-hidden="true"></div>
       <div class="hero-orbit orbit-two" aria-hidden="true"></div>
       <div class="hero-content">
-        <p class="eyebrow">Reverse Engineering · System Analysis · Security Projects</p>
-        <h1>Damian Lab</h1>
+        <p class="eyebrow">Reverse Engineering · Hypervisor-assisted Debugger · Security Projects</p>
+        <h1>Damian Portfolio</h1>
         <p class="hero-description">
-          직접 구현하고 분석한 보안 프로젝트를 기록하는 포트폴리오입니다.
-          디버거 제작, 리버싱 문제 설계, OpenWrt 기반 네트워크 보안 프로젝트를 중심으로
-          시스템이 내부에서 어떻게 동작하는지 공부하고 있습니다.
+          리버스 엔지니어링과 시스템 보안을 공부하며,
+          직접 구현한 프로젝트와 교육 활동을 정리한 포트폴리오입니다.
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#projects">View Projects</a>
@@ -63,12 +64,11 @@ Damian
 $ focus
 Reverse Engineering
 Windows Internals
+Hypervisor-assisted Debugger
 Network Security
-CTF Problem Design
 
-$ status
-Building, analyzing,
-and documenting.</code></pre>
+$ path
+Android → RE → Debugger</code></pre>
         </div>
       </aside>
     </section>
@@ -76,26 +76,28 @@ and documenting.</code></pre>
     <section class="section section-padding" id="about">
       <div class="section-heading">
         <p class="eyebrow">About</p>
-        <h2>낮은 레벨에서 동작 원리를 이해하는 것을 좋아합니다.</h2>
+        <h2>About Me</h2>
       </div>
       <div class="about-grid">
         <div class="about-card wide-card">
           <h3>Profile</h3>
           <p>
-            리버스 엔지니어링과 시스템 분석을 중심으로 공부하고 있습니다. 단순히 도구를 사용하는 데서 끝내지 않고,
-            프로세스 메모리, PE 구조, 디버깅 흐름, 네트워크 인증 구조처럼 프로그램과 운영체제가 실제로 맞물리는 부분을 직접 확인하려고 합니다.
+            Android 앱 개발과 배포 경험을 시작으로, 루팅 환경과 Xposed 모듈 개발을 접하며 프로그램의 실행 흐름에 관심을 갖게 되었습니다.
           </p>
           <p>
-            최근에는 직접 만든 디버거 프로젝트와 리버싱 CTF 문제 제작 경험을 바탕으로, 분석자가 어떤 순서로 정보를 찾고 판단하는지 정리하는 데 관심을 두고 있습니다.
+            이후 리버스 엔지니어링을 공부하며 DLL Injection, VEH, 디버그 레지스터 후킹을 실습했고, 현재는 Intel VT-x와 EPT를 활용한 하이퍼바이저 기반 디버거를 구현하고 있습니다.
+          </p>
+          <p>
+            현재는 리버스 엔지니어링 기반을 악성코드 분석 역량으로 확장하기 위해 정적·동적 분석 실습을 진행하고 있습니다.
           </p>
         </div>
         <div class="about-card stat-card">
-          <span class="stat-number">03+</span>
-          <span class="stat-label">Main Projects</span>
+          <span class="stat-number">Reversing</span>
+          <span class="stat-label">Binary Analysis · Hooking · Debugging</span>
         </div>
         <div class="about-card stat-card">
-          <span class="stat-number">RE</span>
-          <span class="stat-label">Primary Interest</span>
+          <span class="stat-number">Analysis</span>
+          <span class="stat-label">Static & Dynamic Analysis Practice</span>
         </div>
       </div>
     </section>
@@ -104,33 +106,44 @@ and documenting.</code></pre>
       <div class="section-heading split-heading">
         <div>
           <p class="eyebrow">Projects</p>
-          <h2>직접 구현하거나 분석한 프로젝트</h2>
+          <h2>직접 구현하고 분석한 프로젝트</h2>
         </div>
-        <p class="section-summary">
-          프로젝트마다 “무엇을 만들었는지”보다 “어떤 구조를 이해했는지”가 보이도록 정리했습니다.
-        </p>
+
       </div>
 
       <div class="project-list">
         <article class="project-card featured-card">
           <div class="project-meta">
             <span>01</span>
-            <span>Debugger · Windows Internals</span>
+            <span>Hypervisor-assisted Debugger</span>
           </div>
           <h3>Damian Debugger</h3>
+          <figure class="project-visual">
+            <img src="assets/img/damian-debugger-dashboard.jpg" alt="Damian Debugger에서 Notepad.exe를 attach한 뒤 디스어셈블리, 레지스터, 메모리, 스택 패널을 보여주는 화면" loading="lazy" />
+            <figcaption>
+              Hypervisor-assisted debugger prototype. Notepad.exe를 대상으로 디스어셈블리, 레지스터, 메모리, 스택 상태를 시각화하고,
+              EPT hook 관리 흐름을 함께 구성한 화면입니다.
+            </figcaption>
+          </figure>
           <p>
-            프로세스 메모리와 PE 정보를 직접 확인하며 프로그램의 실행 흐름을 분석하기 위한 디버거 프로젝트입니다.
-            RAM에 올라온 모듈 정보, PE 헤더, 함수 흐름, 디버깅 이벤트를 다루며 Windows 내부 구조를 학습했습니다.
+            Damian Debugger는 디버거의 주요 기능을 Intel VT-x 기반 하이퍼바이저 계층에서 구현하는 것을 목표로 진행 중인 프로젝트입니다.
+            일반적인 사용자 모드 디버깅 API에만 의존하는 방식이 아니라, VM-exit과 EPT를 활용해 실행 흐름과 메모리 접근을 더 낮은 계층에서 관찰하는 구조를 공부하며 만들고 있습니다.
+          </p>
+          <p>
+            구현 과정에서는 VMX, VMCS, EPT, Windows 내부 구조를 먼저 정리하고,
+            기능 단위로 코드를 검토·수정·빌드·테스트하며 하이퍼바이저 기반 디버거 구조를 이해하고 있습니다.
           </p>
           <ul class="project-points">
-            <li>프로세스 메모리, 모듈, PE 구조 확인 흐름 정리</li>
-            <li>디버깅 이벤트와 분석자가 보는 정보의 관계 학습</li>
-            <li>CLI 기반 디버깅 인터페이스 확장 방향 검토</li>
+            <li>하이퍼바이저 계층에서 실행 흐름을 관찰하는 디버거 구조 설계</li>
+            <li>VM-exit 기반 이벤트 처리와 EPT hook을 이용한 메모리 접근 감시 흐름 학습</li>
+            <li>디스어셈블리, 레지스터, 메모리, 스택, 프로세스 상태를 한 화면에서 확인하는 분석 UI 구성</li>
+            <li>기능 단위 검토와 테스트를 통해 Windows 내부 동작과 디버깅 흐름 학습</li>
           </ul>
           <div class="tags">
             <span>C/C++</span>
-            <span>WinAPI</span>
-            <span>PE</span>
+            <span>Intel VT-x</span>
+            <span>EPT Hooks</span>
+            <span>VM-exit</span>
             <span>Debugger</span>
           </div>
         </article>
@@ -138,23 +151,31 @@ and documenting.</code></pre>
         <article class="project-card">
           <div class="project-meta">
             <span>02</span>
-            <span>CTF · Reverse Engineering</span>
+            <span>CTF · Reverse Engineering · 2022</span>
           </div>
           <h3>Reversing CTF Problems</h3>
+          <figure class="project-visual compact-visual">
+            <img src="assets/img/register4.png" alt="리버싱 CTF 문제에서 레지스터와 조건 분기를 확인하는 디버깅 화면" loading="lazy" />
+            <figcaption>
+              FindName 문제 풀이 도중 레지스터 값과 조건 분기를 확인하는 디버깅 화면입니다.
+            </figcaption>
+          </figure>
           <p>
-            동아리 내부 해킹 대회에서 사용할 리버싱 분야 CTF 문제를 제작하고 풀이 흐름을 설계했습니다.
-            참가자가 디컴파일, 문자열 분석, 조건문 추적, 디버깅 과정을 자연스럽게 따라갈 수 있도록 문제 난이도와 힌트 흐름을 구성했습니다.
+            2022년 동아리 내부 해킹 대회에서 사용할 리버싱 분야 CTF 문제를 제작했습니다.
+            참가자가 문자열 분석, 디컴파일, 디버깅 과정을 따라가며 풀이할 수 있도록 문제 흐름과 난이도를 설계했습니다.
           </p>
           <ul class="project-points">
-            <li>DecompileMe, DoNotDebug, FindFunction, FindName, WhatIsYourPassword 등 문제 정리</li>
-            <li>풀이자가 막히는 지점을 고려한 분석 흐름 설계</li>
-            <li>문제 제작 후 write-up 형태로 풀이 과정 문서화</li>
+            <li>DecompileMe, DoNotDebug, FindFunction, FindName, WhatIsYourPassword 등 실행 파일 기반 리버싱 문제 제작</li>
+            <li>풀이자가 어떤 단서를 찾아야 하는지 고려해 분기, 문자열, 함수 흐름 구성</li>
+            <li>문제 제작 후 write-up으로 주요 분석 과정과 풀이 흐름 문서화</li>
           </ul>
           <div class="tags">
             <span>x64dbg</span>
             <span>IDA</span>
             <span>Ghidra</span>
+            <span>Android</span>
             <span>CTF</span>
+            <span>Write-up</span>
           </div>
           <a class="text-link" href="https://github.com/damian100/CTF-damian" target="_blank" rel="noreferrer">View Repository →</a>
         </article>
@@ -166,18 +187,20 @@ and documenting.</code></pre>
           </div>
           <h3>WPA3-SAE + Kyber on OpenWrt</h3>
           <p>
-            캡스톤 프로젝트에서 WPA3-SAE 구조에 양자내성암호 Kyber를 통합하는 프로젝트에 참여했습니다.
-            OpenWrt 펌웨어 빌드, 테스트 환경 구성, 네트워크 동작 확인을 맡으며 인증 구조와 펌웨어 빌드 과정을 학습했습니다.
+            캡스톤 프로젝트에서 WPA3-SAE 구조에 양자내성암호 Kyber를 통합하는 프로젝트에 네트워크 팀으로 참여했습니다.
+            OpenWrt 펌웨어 빌드와 테스트 환경 구성을 맡으며 인증 구조와 실제 네트워크 동작을 확인했습니다.
           </p>
           <ul class="project-points">
-            <li>OpenWrt 기반 펌웨어 빌드 및 테스트 흐름 경험</li>
-            <li>WPA3-SAE 인증 구조와 Kyber 적용 지점 이해</li>
-            <li>liboqs 연동 환경과 네트워크 테스트 과정 정리</li>
+            <li>OpenWrt 기반 펌웨어 빌드, 테스트 이미지 구성, 동작 확인</li>
+            <li>hostapd, WPA3-SAE 인증 흐름, liboqs 연동 구조 학습</li>
+            <li>Kyber/ML-KEM 적용 지점과 펌웨어 환경에서의 테스트 과정 정리</li>
           </ul>
           <div class="tags">
             <span>OpenWrt</span>
+            <span>hostapd</span>
             <span>WPA3-SAE</span>
             <span>Kyber</span>
+            <span>ML-KEM</span>
             <span>liboqs</span>
           </div>
           <a class="text-link" href="https://github.com/openWrtwithKyber/network/tree/feat/add-liboqs-opt" target="_blank" rel="noreferrer">View Branch →</a>
@@ -186,100 +209,217 @@ and documenting.</code></pre>
         <article class="project-card">
           <div class="project-meta">
             <span>04</span>
-            <span>Android · Runtime Analysis</span>
+            <span>Android · Hooking · Reverse Engineering</span>
           </div>
-          <h3>Android Reverse Engineering Study</h3>
+          <h3>Android Hooking & Runtime Study</h3>
           <p>
-            안드로이드 앱 구조와 런타임 동작을 이해하기 위해 루팅, Xposed 모듈, 디컴파일 결과 분석을 학습했습니다.
-            난독화된 코드에서 의미 있는 이름과 흐름을 복구하는 과정에 관심을 가지고 있습니다.
+            루팅 환경과 Xposed 모듈을 실습하며 Android 앱의 런타임 동작을 분석했습니다.
+            앱을 사용자 관점에서만 보는 것이 아니라, 메서드 호출과 실행 흐름이 후킹을 통해 어떻게 바뀔 수 있는지 확인했습니다.
           </p>
           <ul class="project-points">
-            <li>APK 디컴파일 결과에서 클래스와 메서드 역할 추정</li>
-            <li>Xposed 기반 런타임 후킹 구조 학습</li>
-            <li>ProGuard 난독화 코드 리네이밍 자동화 아이디어 구상</li>
+            <li>루팅 환경에서 Xposed 모듈을 이용한 런타임 후킹 개념 실습</li>
+            <li>메서드 호출, 앱 동작 변경, 실행 흐름 관찰 방식 학습</li>
+            <li>JADX를 이용한 APK 구조 확인과 Android 정적 분석 흐름으로 관심 확장</li>
           </ul>
           <div class="tags">
             <span>Android</span>
             <span>Xposed</span>
             <span>JADX</span>
-            <span>Frida</span>
+            <span>Hooking</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-meta">
+            <span>05</span>
+            <span>Android · Play Store · Automation</span>
+          </div>
+          <h3>Student Apps & Notice Parser</h3>
+          <p>
+            학창시절 여러 Android 앱을 직접 개발해 Play Store에 출시하고 사용자 피드백을 반영했습니다.
+            고등학교 생활 앱에서는 급식, 시간표, 게시판처럼 학생들이 자주 확인하는 정보를 한곳에 모았고,
+            대학교에서는 학교 게시판 구조를 분석해 공지 데이터를 앱에서 보기 좋게 정리하는 파싱 기능을 구현했습니다.
+          </p>
+          <ul class="project-points">
+            <li>급식, 시간표, 게시판 등 학교생활 정보를 통합한 학생용 Android 앱 구현</li>
+            <li>대학교 게시판 HTML 구조 분석, 공지 데이터 수집 및 목록 정리 자동화</li>
+            <li>여러 앱을 Play Store에 출시하며 실제 사용자 흐름과 피드백 반영</li>
+          </ul>
+          <div class="tags">
+            <span>Android</span>
+            <span>Java</span>
+            <span>Play Store</span>
+            <span>Web Parsing</span>
+            <span>Automation</span>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="section section-padding" id="activities">
+    <section class="section section-padding alt-section" id="activities">
       <div class="section-heading">
-        <p class="eyebrow">Activities</p>
-        <h2>공부한 내용을 설명하고 문제로 만들어보는 활동</h2>
+        <p class="eyebrow">Activities & Growth</p>
+        <h2>리버싱을 공부하고, 만들고, 설명한 기록</h2>
       </div>
+      <div class="activity-showcase">
+        <article class="photo-card">
+          <img src="assets/img/reversing-seminar.jpg" alt="강의실에서 리버스 엔지니어링 세미나를 진행하는 장면" loading="lazy" />
+          <div class="photo-card-content">
+            <span class="photo-label">Seminar</span>
+            <h3>Reversing Seminar</h3>
+            <p>
+              정보보안 과동아리 i-Keeper에서 리버스 엔지니어링 입문 세미나를 진행하며 디컴파일, 디버깅, 문자열 분석의 기본 흐름을 설명했습니다.
+            </p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <img src="assets/img/reversing-tutoring.jpg" alt="소규모 리버싱 튜터링을 진행하는 장면" loading="lazy" />
+          <div class="photo-card-content">
+            <span class="photo-label">Tutoring</span>
+            <h3>Reversing Tutoring</h3>
+            <p>
+              리버싱에 익숙하지 않은 학생들을 대상으로 문제 접근 방식과 디버깅 기초를 단계별로 설명하는 소규모 튜터링을 진행했습니다.
+            </p>
+          </div>
+        </article>
+      </div>
+
       <div class="timeline">
         <div class="timeline-item">
-          <span class="timeline-date">2026</span>
+          <span class="timeline-date">Start</span>
           <div>
-            <h3>리버싱 분야 CTF 문제 제작</h3>
+            <h3>앱 개발과 배포 경험</h3>
             <p>
-              동아리 내부 해킹 대회에서 사용할 리버싱 문제를 직접 제작했습니다. 단순히 정답만 숨기는 방식이 아니라,
-              참가자가 디버깅 도구로 어떤 단서를 찾을 수 있는지 고려하며 문제 흐름을 설계했습니다.
+              여러 Android 앱을 직접 개발하고 Play Store에 출시하며, 개발은 코드를 작성하는 것에서 끝나는 것이 아니라 사용자 피드백을 받고 개선하는 과정이라는 점을 배웠습니다.
             </p>
           </div>
         </div>
         <div class="timeline-item">
-          <span class="timeline-date">2026</span>
+          <span class="timeline-date">Expand</span>
           <div>
-            <h3>신입생 대상 리버스 엔지니어링 세미나 준비</h3>
+            <h3>루팅, Xposed, 리버스 엔지니어링으로 확장</h3>
             <p>
-              C 언어 기초를 배우는 사람도 따라올 수 있도록 PE 구조, 디컴파일, 디버깅의 기본 흐름을 설명하는 자료를 준비했습니다.
-              어려운 개념을 도구 화면과 예제로 연결해 설명하는 데 집중했습니다.
+              Android 루팅과 Xposed 모듈 개발을 접하면서 프로그램을 외부에서 사용하는 것과 내부 동작을 분석하는 것은 다르다는 점을 느꼈고, 리버싱과 시스템 분석으로 관심이 넓어졌습니다.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">Build</span>
+          <div>
+            <h3>DLL 인젝터와 후킹 실습</h3>
+            <p>
+              DLL 인젝터를 작성하고 VEH와 디버그 레지스터를 이용한 후킹 코드를 구현하며, 예외 처리 흐름과 하드웨어 브레이크포인트가 실행 흐름에 미치는 영향을 확인했습니다.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">Teach</span>
+          <div>
+            <h3>리버싱 세미나와 튜터링 진행</h3>
+            <p>
+              리버싱 입문 세미나와 소규모 튜터링을 진행하며, 분석 흐름을 단순히 따라 하는 수준이 아니라 다른 사람이 이해할 수 있도록 설명하는 경험을 쌓았습니다.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">2022</span>
+          <div>
+            <h3>리버싱 CTF 문제 제작</h3>
+            <p>
+              동아리 내부 해킹 대회용 리버싱 문제를 제작하며, 참가자의 풀이 흐름을 고려해 문제를 설계하고 write-up으로 분석 과정을 문서화했습니다.
             </p>
           </div>
         </div>
         <div class="timeline-item">
           <span class="timeline-date">2025</span>
           <div>
-            <h3>보안 USB·외장 저장장치 분석 연구 경험</h3>
+            <h3>WPA3-SAE + Kyber 캡스톤 프로젝트</h3>
             <p>
-              저장장치 보안 구조와 분석 절차를 다루는 연구 활동을 경험하며, 실제 장치와 프로그램이 맞물리는 지점을 분석하는 방법을 배웠습니다.
+              네트워크 팀으로 참여해 OpenWrt 빌드와 테스트를 담당했습니다. 보안 프로토콜이 코드와 펌웨어 환경에서 실제로 어떻게 동작하는지 확인하는 경험이었습니다.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-date">Now</span>
+          <div>
+            <h3>Hypervisor-assisted Debugger</h3>
+            <p>
+              하이퍼바이저 계층에서 디버거 기능을 구현하는 것을 목표로 VMX/VMCS/EPT 구조를 공부하고,
+              기능 단위 검토와 테스트를 반복하며 낮은 계층의 실행 관찰 방식을 탐구하고 있습니다.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-padding alt-section" id="skills">
+    <section class="section section-padding" id="skills">
       <div class="section-heading split-heading">
         <div>
           <p class="eyebrow">Skills</p>
           <h2>관심 기술과 사용 도구</h2>
         </div>
-        <p class="section-summary">
-          깊게 다루는 기술과 현재 학습 중인 기술을 함께 정리했습니다.
-        </p>
+
       </div>
       <div class="skill-grid">
         <div class="skill-card">
           <h3>Reverse Engineering</h3>
-          <p>PE 구조, 디컴파일 결과 분석, 문자열/함수 흐름 추적, anti-debugging 개념 학습</p>
+          <p>x64dbg, IDA, Ghidra, PE Analysis, Windows 실행 파일 구조, 문자열/함수 흐름 추적, Unpacking, Anti-Debugging 개념</p>
         </div>
         <div class="skill-card">
-          <h3>Windows Internals</h3>
-          <p>프로세스 메모리, 모듈 정보, 디버깅 이벤트, 시스템 호출과 커널 구조 기초</p>
+          <h3>Windows & System Programming</h3>
+          <p>C/C++17, Windows API, DLL Injection, VEH, Debug Registers, 프로세스 메모리와 디버깅 이벤트</p>
         </div>
         <div class="skill-card">
-          <h3>Network Security</h3>
-          <p>WPA3-SAE, OpenWrt 빌드, 펌웨어 테스트, 양자내성암호 적용 흐름</p>
+          <h3>Debugger Development</h3>
+          <p>Hypervisor-assisted debugging, VM-exit handling, EPT hook concept, register/memory/stack view, process attach UI</p>
+        </div>
+        <div class="skill-card">
+          <h3>Hypervisor & Kernel</h3>
+          <p>Intel VT-x, VMXON, VMCS, VM-entry, VM-exit, EPT, MSR, control register 조건, VMware 기반 실습</p>
+        </div>
+        <div class="skill-card">
+          <h3>Network & Embedded</h3>
+          <p>OpenWrt, hostapd, WPA3-SAE, liboqs, Kyber/ML-KEM, Firmware Build, 테스트 환경 구성</p>
+        </div>
+        <div class="skill-card">
+          <h3>Android Analysis</h3>
+          <p>Android 앱 개발, 루팅 환경, Xposed, JADX, 런타임 후킹 개념</p>
         </div>
         <div class="skill-card">
           <h3>Tools</h3>
-          <p>x64dbg, IDA, Ghidra, JADX, Frida, Git/GitHub, Linux, VMware</p>
+          <p>x64dbg, IDA, Ghidra, JADX, Git/GitHub, Linux, VMware, Visual Studio</p>
         </div>
         <div class="skill-card">
           <h3>Programming</h3>
           <p>C/C++, Python, Java, JavaScript, shell script를 프로젝트 목적에 맞게 사용</p>
         </div>
         <div class="skill-card">
-          <h3>Documentation</h3>
-          <p>프로젝트 과정, 분석 흐름, 문제 풀이 과정을 write-up과 발표 자료로 정리</p>
+          <h3>Analysis Report & Documentation</h3>
+          <p>분석 과정 정리, 테스트 결과 기록, CTF write-up, 프로젝트 README, 분석 정보 작성 연습, 재현 가능한 학습 기록 작성</p>
+        </div>
+        <div class="skill-card certification-card">
+          <div class="cert-header">
+            <span class="cert-eyebrow">Certifications</span>
+            <h3>자격 및 시험</h3>
+            <p>운영체제, 보안, CS 기초를 자격 시험과 실기 준비로 함께 검증하고 있습니다.</p>
+          </div>
+          <div class="cert-list">
+            <div class="cert-item">
+              <span class="cert-status acquired">취득</span>
+              <strong>리눅스마스터 1급</strong>
+              <p>리눅스 운영체제와 시스템 관리 기초 역량</p>
+            </div>
+            <div class="cert-item">
+              <span class="cert-status preparing">필기 합격</span>
+              <strong>정보보안기사</strong>
+              <p>실기 준비 중</p>
+            </div>
+            <div class="cert-item">
+              <span class="cert-status preparing">필기 합격</span>
+              <strong>정보처리기사</strong>
+              <p>실기 준비 중</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -287,14 +427,15 @@ and documenting.</code></pre>
     <section class="section section-padding" id="contact">
       <div class="contact-card">
         <p class="eyebrow">Contact</p>
-        <h2>프로젝트와 학습 기록은 GitHub에서 확인할 수 있습니다.</h2>
+        <h2>기록하고 검증하는 보안 연구자가 되고 싶습니다.</h2>
         <p>
-          이 포트폴리오는 계속 업데이트 중입니다. 프로젝트 설명, write-up, 분석 기록을 정리하면서
-          실제로 구현하고 이해한 내용을 중심으로 보완하고 있습니다.
+          이 포트폴리오는 리버스 엔지니어링, 하이퍼바이저 기반 디버거 구현, 네트워크 보안 프로젝트와 교육 활동을 한 흐름으로 정리한 공간입니다.
+          프로젝트 코드와 write-up은 GitHub를 통해 계속 보완하고 있습니다.
         </p>
         <div class="contact-actions">
           <a class="btn btn-primary" href="https://github.com/damian100" target="_blank" rel="noreferrer">GitHub Profile</a>
           <a class="btn btn-secondary" href="https://github.com/damian100/CTF-damian" target="_blank" rel="noreferrer">CTF Repository</a>
+          <a class="btn btn-secondary" href="#top">Back to Top</a>
         </div>
       </div>
     </section>
@@ -304,6 +445,6 @@ and documenting.</code></pre>
     <p>© <span id="year"></span> Damian Lab. Built for GitHub Pages.</p>
   </footer>
 
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=20260523-4"></script>
 </body>
 </html>

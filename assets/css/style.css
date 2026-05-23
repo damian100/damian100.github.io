@@ -41,9 +41,26 @@ body.nav-open {
   overflow: hidden;
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: var(--scroll-progress, 0%);
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  box-shadow: 0 0 18px rgba(125, 211, 252, 0.38);
+  pointer-events: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 button,
@@ -62,6 +79,76 @@ a {
   background-size: 42px 42px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 80%);
   z-index: 0;
+}
+
+.page-noise::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  opacity: 0.42;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 46%,
+    rgba(125, 211, 252, 0.055) 50%,
+    transparent 54%,
+    transparent 100%
+  );
+  transform: translateX(-55%);
+  animation: surface-sweep 18s ease-in-out infinite;
+}
+
+@keyframes surface-sweep {
+  0%,
+  18% {
+    transform: translateX(-55%);
+  }
+
+  48%,
+  100% {
+    transform: translateX(55%);
+  }
+}
+
+@keyframes terminal-scan {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+
+  18%,
+  45% {
+    opacity: 0.5;
+  }
+
+  72%,
+  100% {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes panel-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .site-header {
@@ -256,14 +343,32 @@ h3 {
 .hero-card {
   position: relative;
   z-index: 2;
+  animation: panel-float 8s ease-in-out infinite;
 }
 
 .terminal-window {
+  position: relative;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: rgba(2, 6, 23, 0.76);
   box-shadow: var(--shadow);
+}
+
+.terminal-window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(125, 211, 252, 0.08) 48%,
+    transparent 56%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transform: translateY(-120%);
+  animation: terminal-scan 7s ease-in-out infinite;
 }
 
 .terminal-header {
@@ -289,6 +394,14 @@ h3 {
   overflow-x: auto;
 }
 
+.terminal-window code::after {
+  content: "_";
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--primary);
+  animation: caret-blink 1.1s steps(2, end) infinite;
+}
+
 .hero-orbit {
   position: absolute;
   border: 1px solid rgba(125, 211, 252, 0.18);
@@ -312,7 +425,7 @@ h3 {
 }
 
 .section {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 120px;
 }
 
 .alt-section {
@@ -336,11 +449,6 @@ h3 {
   align-items: end;
 }
 
-.section-summary {
-  margin: 0;
-  color: var(--muted);
-}
-
 .about-grid {
   display: grid;
   grid-template-columns: 1.4fr 0.8fr 0.8fr;
@@ -356,6 +464,16 @@ h3 {
   background: var(--bg-card);
   box-shadow: 0 20px 70px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(18px);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+}
+
+.about-card:hover,
+.project-card:hover,
+.skill-card:hover,
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(125, 211, 252, 0.24);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(125, 211, 252, 0.04);
 }
 
 .about-card {
@@ -383,14 +501,20 @@ h3 {
 }
 
 .stat-number {
-  display: block;
-  font-size: clamp(2.6rem, 5vw, 4.5rem);
-  line-height: 1;
+  display: inline-block;
+  max-width: calc(100% + 0.24em);
+  margin-left: -0.12em;
+  margin-bottom: -0.1em;
+  padding: 0.12em 0.12em 0.18em;
+  font-size: clamp(2.05rem, 3.35vw, 3rem);
+  line-height: 1.22;
   font-weight: 900;
-  letter-spacing: -0.08em;
+  letter-spacing: 0;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .stat-label {
@@ -416,7 +540,14 @@ h3 {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at top right, rgba(125, 211, 252, 0.14), transparent 20rem);
+  opacity: 0.9;
   pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+  transform: translate3d(-8px, 8px, 0);
 }
 
 .featured-card {
@@ -477,6 +608,111 @@ h3 {
   background: rgba(125, 211, 252, 0.08);
   font-size: 0.82rem;
   font-weight: 700;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.tags span:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.32);
+  background: rgba(125, 211, 252, 0.12);
+}
+
+.project-visual {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.project-visual img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.compact-visual {
+  max-width: 360px;
+}
+
+.compact-visual img {
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 14px;
+  background: rgba(2, 6, 23, 0.52);
+}
+
+.project-card:hover .project-visual img {
+  transform: scale(1.025);
+}
+
+.project-visual figcaption {
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.activity-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.photo-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(18px);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.photo-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(125, 211, 252, 0.24);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.34);
+}
+
+.photo-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.04);
+  transition: transform 0.5s ease;
+}
+
+.photo-card:hover img {
+  transform: scale(1.025);
+}
+
+.photo-card-content {
+  padding: 24px;
+}
+
+.photo-label {
+  display: inline-flex;
+  margin-bottom: 12px;
+  padding: 5px 10px;
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  border-radius: 999px;
+  color: var(--primary);
+  background: rgba(125, 211, 252, 0.08);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.photo-card p {
+  color: var(--muted);
+  margin: 0;
 }
 
 .text-link {
@@ -499,6 +735,13 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.04);
+  transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+}
+
+.timeline-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(134, 239, 172, 0.2);
+  background: rgba(255, 255, 255, 0.055);
 }
 
 .timeline-date {
@@ -522,6 +765,93 @@ h3 {
 
 .skill-card {
   padding: 26px;
+}
+
+.certification-card {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.7fr);
+  gap: 28px;
+  align-items: center;
+  padding: clamp(28px, 4vw, 42px);
+  background:
+    radial-gradient(circle at top left, rgba(134, 239, 172, 0.14), transparent 20rem),
+    radial-gradient(circle at top right, rgba(125, 211, 252, 0.14), transparent 22rem),
+    var(--bg-card);
+}
+
+.cert-header h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.cert-header p {
+  max-width: 420px;
+}
+
+.cert-eyebrow {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--success);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cert-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cert-item {
+  min-height: 150px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: var(--radius-sm);
+  background: rgba(8, 11, 18, 0.34);
+  transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+}
+
+.cert-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(134, 239, 172, 0.22);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.cert-item strong {
+  display: block;
+  margin-top: 16px;
+  color: var(--text);
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.cert-item p {
+  margin-top: 8px;
+  font-size: 0.86rem;
+}
+
+.cert-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 0.73rem;
+  font-weight: 900;
+}
+
+.cert-status.acquired {
+  color: #052e16;
+  background: var(--success);
+}
+
+.cert-status.preparing {
+  color: #dbeafe;
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  background: rgba(125, 211, 252, 0.08);
 }
 
 .contact-card {
@@ -561,11 +891,38 @@ h3 {
   margin: 0;
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.is-visible.about-card:hover,
+.reveal.is-visible.project-card:hover,
+.reveal.is-visible.skill-card:hover,
+.reveal.is-visible.contact-card:hover,
+.reveal.is-visible.photo-card:hover {
+  transform: translateY(-4px);
+}
+
+.reveal.is-visible.timeline-item:hover {
+  transform: translateX(4px);
+}
+
 @media (max-width: 920px) {
   .hero,
   .split-heading,
   .about-grid,
   .project-list,
+  .activity-showcase,
+  .certification-card,
+  .cert-list,
   .skill-grid {
     grid-template-columns: 1fr;
   }
@@ -661,6 +1018,17 @@ h3 {
   *,
   *::before,
   *::after {
+    animation: none !important;
     transition: none !important;
+  }
+
+  .hero-card,
+  .about-card:hover,
+  .project-card:hover,
+  .skill-card:hover,
+  .contact-card:hover,
+  .photo-card:hover,
+  .timeline-item:hover {
+    transform: none;
   }
 }
