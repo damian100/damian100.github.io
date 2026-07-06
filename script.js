@@ -41,10 +41,14 @@
   }
 
   function renderToggle() {
-    // The button shows the theme it will switch TO
+    // The button shows the theme it will switch TO; the accessible name
+    // must contain the visible text (WCAG 2.5.3 Label in Name)
     var next = currentTheme() === 'dark' ? 'light' : 'dark';
     toggle.textContent = next.toUpperCase();
-    toggle.setAttribute('aria-label', next === 'dark' ? '어두운 테마로 전환' : '밝은 테마로 전환');
+    toggle.setAttribute(
+      'aria-label',
+      next.toUpperCase() + ' — ' + (next === 'dark' ? '어두운 테마로 전환' : '밝은 테마로 전환')
+    );
   }
 
   toggle.addEventListener('click', function () {
@@ -55,10 +59,15 @@
     drawAllGlyphs();
   });
 
-  media.addEventListener('change', function () {
+  function onSchemeChange() {
     renderToggle();
     drawAllGlyphs();
-  });
+  }
+  if (media.addEventListener) {
+    media.addEventListener('change', onSchemeChange);
+  } else if (media.addListener) {
+    media.addListener(onSchemeChange); // Safari <= 13
+  }
 
   renderToggle();
 
@@ -136,11 +145,24 @@
 
   /* ---------- page integrity (colophon detail) ---------- */
 
+  /* Hash the served bytes, not the live DOM, so the value is stable and
+     independently verifiable: sha256sum index.html */
   var integrity = document.getElementById('page-integrity');
-  if (subtle) {
-    sha256Hex(document.documentElement.outerHTML).then(function (hex) {
-      integrity.textContent = hex;
-    });
+  if (subtle && window.fetch) {
+    fetch('index.html', { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        return res.arrayBuffer();
+      })
+      .then(function (buf) { return subtle.digest('SHA-256', buf); })
+      .then(function (buf) {
+        integrity.textContent = Array.prototype.map
+          .call(new Uint8Array(buf), function (b) {
+            return b.toString(16).padStart(2, '0');
+          })
+          .join('');
+      })
+      .catch(function () { integrity.textContent = 'unavailable'; });
   } else {
     integrity.textContent = 'unavailable';
   }
